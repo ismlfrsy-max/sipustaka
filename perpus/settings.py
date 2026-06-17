@@ -75,14 +75,11 @@ WSGI_APPLICATION = 'perpus.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'perpus2_db',
-        'USER': 'postgres',
-        'PASSWORD': 'ismailhasan',  # <-- Ganti dengan password PostgreSQL kamu
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
