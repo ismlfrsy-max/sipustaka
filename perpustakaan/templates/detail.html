@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Kelola Buku - Detail Buku{% endblock %}
+
+{% block content %}
+<div class="flex items-start space-x-4 mb-8">
+    <a href="{% url 'dashboard' %}" class="text-slate-400 hover:text-slate-800 transition mt-1 text-lg">←</a>
+    <div>
+        <p class="text-xs font-medium text-slate-400">Kelola Buku</p>
+        <h2 class="text-2xl font-bold text-slate-800">Detail Buku</h2>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 max-w-3xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Judul</span>
+            <span class="text-sm font-bold text-slate-800 mt-1 block">{{ buku.judul }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Pengarang</span>
+            <span class="text-sm font-bold text-slate-800 mt-1 block">{{ buku.pengarang }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kategori</span>
+            <span class="text-sm font-semibold text-slate-800 mt-1 block">{{ buku.kategori }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Penerbit</span>
+            <span class="text-sm font-semibold text-slate-800 mt-1 block">{{ buku.penerbit }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tahun Terbit</span>
+            <span class="text-sm font-semibold text-slate-800 mt-1 block">{{ buku.tahun_terbit }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">ISBN</span>
+            <span class="text-sm font-semibold text-slate-800 mt-1 block">{{ buku.isbn|default:"-" }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Rak / Lokasi</span>
+            <span class="text-sm font-semibold text-slate-800 mt-1 block">{{ buku.rak }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Stok</span>
+            <span class="text-sm font-semibold text-slate-800 mt-1 block">{{ buku.stok }}</span>
+        </div>
+
+        <div class="bg-slate-50/70 p-4 rounded-xl border border-slate-100 md:col-span-2">
+            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Deskripsi</span>
+            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">{{ buku.deskripsi|default:"Tidak ada deskripsi." }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

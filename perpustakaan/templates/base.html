@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SIPUSTAKA{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex">
+
+    <aside class="w-64 bg-[#0a0f24] text-slate-400 flex flex-col justify-between p-6 fixed h-full shadow-xl">
+        <div class="space-y-8">
+            <div class="flex items-center space-x-3 text-white">
+                <div class="bg-blue-500 text-white p-2.5 rounded-xl font-bold text-lg shadow-md shadow-blue-500/30">P</div>
+                <div>
+                    <p class="text-xs text-slate-500 font-semibold tracking-wider uppercase">SIPUSTAKA</p>
+                    <h1 class="text-sm font-bold leading-tight text-slate-200">Sistem Peminjaman Buku</h1>
+                </div>
+            </div>
+
+            <nav class="space-y-2">
+                <a href="{% url 'main_dashboard' %}" 
+                   class="flex items-center space-x-3 px-4 py-3 rounded-xl transition text-sm 
+                   {% if request.resolver_match.url_name == 'main_dashboard' %} bg-slate-800 text-white font-medium {% else %} hover:bg-slate-800/50 hover:text-white {% endif %}">
+                    <span>📊</span> <span>Dashboard</span>
+                </a>
+
+                <a href="{% url 'dashboard' %}" 
+                   class="flex items-center space-x-3 px-4 py-3 rounded-xl transition text-sm 
+                   {% if request.resolver_match.url_name == 'dashboard' or 'buku' in request.path %} bg-slate-800 text-white font-medium {% else %} hover:bg-slate-800/50 hover:text-white {% endif %}">
+                    <span>📖</span> <span>Buku</span>
+                </a>
+
+                <a href="{% url 'daftar_peminjaman' %}" 
+                   class="flex items-center space-x-3 px-4 py-3 rounded-xl transition text-sm 
+                   {% if request.resolver_match.url_name == 'daftar_peminjaman' or 'peminjaman' in request.path %} bg-slate-800 text-white font-medium {% else %} hover:bg-slate-800/50 hover:text-white {% endif %}">
+                    <span>💳</span> <span>Peminjaman</span>
+                </a>
+
+                <a href="{% url 'daftar_siswa' %}" 
+                   class="flex items-center space-x-3 px-4 py-3 rounded-xl transition text-sm 
+                   {% if request.resolver_match.url_name == 'daftar_siswa' or 'siswa' in request.path %} bg-slate-800 text-white font-medium {% else %} hover:bg-slate-800/50 hover:text-white {% endif %}">
+                    <span>👥</span> <span>User</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col">
+            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Admin Aktif</span>
+            <span class="text-sm font-semibold text-slate-200 mt-0.5">Budi Siregar</span>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-64 p-8 min-h-screen lg:max-w-7xl">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

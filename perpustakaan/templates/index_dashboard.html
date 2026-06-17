@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard Utama - SIPUSTAKA{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden">
+            <div>
+                <p class="text-sm font-semibold text-slate-500">Total Buku</p>
+                <h3 class="text-3xl font-extrabold text-slate-800 mt-2">{{ total_buku }}</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">Keseluruhan unit buku tersedia.</p>
+            <div class="absolute top-6 right-6 text-blue-500 bg-blue-50 p-2 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden">
+            <div>
+                <p class="text-sm font-semibold text-slate-500">Total Judul</p>
+                <h3 class="text-3xl font-extrabold text-slate-800 mt-2">{{ total_judul }}</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">Jumlah koleksi judul buku.</p>
+            <div class="absolute top-6 right-6 text-indigo-500 bg-indigo-50 p-2 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.157 1.906-2.185a48.507 48.507 0 0111.186 0z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden">
+            <div>
+                <p class="text-sm font-semibold text-slate-500">Sedang Dipinjam</p>
+                <h3 class="text-3xl font-extrabold text-slate-800 mt-2">{{ sedang_dipinjam }}</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">Transaksi peminjaman aktif.</p>
+            <div class="absolute top-6 right-6 text-amber-500 bg-amber-50 p-2 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden">
+            <div>
+                <p class="text-sm font-semibold text-slate-500">Sudah Dikembalikan</p>
+                <h3 class="text-3xl font-extrabold text-slate-800 mt-2">{{ sudah_dikembalikan }}</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">Transaksi yang sudah selesai.</p>
+            <div class="absolute top-6 right-6 text-emerald-500 bg-emerald-50 p-2 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Analisis Stok</p>
+                <h4 class="text-lg font-bold text-slate-800">Distribusi Stok Buku</h4>
+            </div>
+            
+            <div class="space-y-4 pt-2">
+                {% for buku in distribusi_buku %}
+                <div class="space-y-1">
+                    <div class="flex justify-between text-sm font-medium">
+                        <span class="text-slate-700">{{ buku.judul }}</span>
+                        <span class="text-blue-600 font-bold">{{ buku.stok }}</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-blue-500 h-full rounded-full transition-all duration-500" style="width: calc(({{ buku.stok }} / 15) * 100%)"></div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-sm text-slate-400">Belum ada data buku.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Status Peminjaman</p>
+                <h4 class="text-lg font-bold text-slate-800">Ringkasan Transaksi</h4>
+            </div>
+
+            <div class="space-y-5 pt-4">
+                <div class="space-y-1">
+                    <div class="flex justify-between text-sm font-medium">
+                        <span class="text-slate-700">Sedang Dipinjam</span>
+                        <span class="text-amber-600 font-bold">{{ sedang_dipinjam }}</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-amber-500 h-full rounded-full" style="width: {% if sedang_dipinjam or sudah_dikembalikan %}calc(({{ sedang_dipinjam }} / ({{ sedang_dipinjam }} + {{ sudah_dikembalikan }})) * 100%){% else %}0%{% endif %}"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <div class="flex justify-between text-sm font-medium">
+                        <span class="text-slate-700">Sudah Dikembalikan</span>
+                        <span class="text-emerald-600 font-bold">{{ sudah_dikembalikan }}</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-emerald-500 h-full rounded-full" style="width: {% if sedang_dipinjam or sudah_dikembalikan %}calc(({{ sudah_dikembalikan }} / ({{ sedang_dipinjam }} + {{ sudah_dikembalikan }})) * 100%){% else %}0%{% endif %}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

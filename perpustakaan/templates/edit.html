@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Kelola Buku - Edit Buku{% endblock %}
+
+{% block content %}
+<div class="flex items-start space-x-4 mb-8">
+    <a href="{% url 'dashboard' %}" class="text-slate-400 hover:text-slate-800 transition mt-1 text-lg">←</a>
+    <div>
+        <p class="text-xs font-medium text-slate-400">Kelola Buku</p>
+        <h2 class="text-2xl font-bold text-slate-800">Edit Buku</h2>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 max-w-3xl">
+    <form method="POST" class="space-y-5">
+        {% csrf_token %}
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Judul Buku</label>
+                <input type="text" name="judul" value="{{ buku.judul }}" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">
+            </div>
+            
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Pengarang</label>
+                <input type="text" name="pengarang" value="{{ buku.pengarang }}" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Kategori</label>
+                <select name="kategori" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat pr-10">
+                    <option value="Novel" {% if buku.kategori == "Novel" %}selected{% endif %}>Novel</option>
+                    <option value="Sains" {% if buku.kategori == "Sains" %}selected{% endif %}>Sains</option>
+                    <option value="Sejarah" {% if buku.kategori == "Sejarah" %}selected{% endif %}>Sejarah</option>
+                    <option value="Komik" {% if buku.kategori == "Komik" %}selected{% endif %}>Komik</option>
+                    <option value="Self-improvement" {% if buku.kategori == "Self-improvement" %}selected{% endif %}>Self-improvement</option>
+                    <option value="Bisnis" {% if buku.kategori == "Bisnis" %}selected{% endif %}>Bisnis</option>
+                    <option value="Fiksi" {% if buku.kategori == "Fiksi" %}selected{% endif %}>Fiksi</option>
+                    <option value="Horor" {% if buku.kategori == "Horor" %}selected{% endif %}>Horor</option>
+                    <option value="Psikologi" {% if buku.kategori == "Psikologi" %}selected{% endif %}>Psikologi</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Penerbit</label>
+                <input type="text" name="penerbit" value="{{ buku.penerbit }}" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Tahun Terbit</label>
+                <input type="number" name="tahun_terbit" value="{{ buku.tahun_terbit }}" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Stok</label>
+                <input type="number" name="stok" value="{{ buku.stok }}" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">ISBN</label>
+                <input type="text" name="isbn" value="{{ buku.isbn|default:'' }}" class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Rak / Lokasi</label>
+                <select name="rak" required class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat pr-10">
+                    <option value="Rak A-01" {% if buku.rak == "Rak A-01" %}selected{% endif %}>Rak A-01</option>
+                    <option value="Rak A-02" {% if buku.rak == "Rak A-02" %}selected{% endif %}>Rak A-02</option>
+                    <option value="Rak A-03" {% if buku.rak == "Rak A-03" %}selected{% endif %}>Rak A-03</option>
+                    <option value="Rak B-01" {% if buku.rak == "Rak B-01" %}selected{% endif %}>Rak B-01</option>
+                    <option value="Rak B-02" {% if buku.rak == "Rak B-02" %}selected{% endif %}>Rak B-02</option>
+                </select>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5">Deskripsi</label>
+                <textarea name="deskripsi" rows="4" class="w-full px-4 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium transition text-slate-700">{{ buku.deskripsi|default:'' }}</textarea>
+            </div>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-4 border-t border-slate-100">
+            <a href="{% url 'dashboard' %}" class="bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 font-semibold text-sm px-5 py-2.5 rounded-xl transition">
+                Batal
+            </a>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-blue-500/10 transition">
+                Perbarui Buku
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

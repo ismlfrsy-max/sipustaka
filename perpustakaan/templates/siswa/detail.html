@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail User - SIPUSTAKA{% endblock %}
+
+{% block content %}
+<div class="mb-8 flex items-center">
+    <a href="{% url 'daftar_siswa' %}" class="mr-4 text-slate-400 hover:text-slate-600 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+    </a>
+    <div>
+        <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Kelola User</p>
+        <h2 class="text-3xl font-bold text-slate-800">Detail User</h2>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto space-y-6">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">ID</p>
+            <p class="text-xl font-bold text-slate-800">{{ siswa.id }}</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Nama</p>
+            <p class="text-xl font-bold text-slate-800">{{ siswa.nama }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Kelas</p>
+            <p class="text-lg font-bold text-slate-800">{{ siswa.kelas }}</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">NIS</p>
+            <p class="text-lg font-bold text-slate-800">{{ siswa.nis }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Status</p>
+            {% if siswa.status == 'Aktif' %}
+                <span class="inline-block bg-emerald-50 text-emerald-600 text-xs px-3 py-1 rounded-full border border-emerald-100 font-bold">
+                    Aktif
+                </span>
+            {% else %}
+                <span class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full border border-slate-200 font-bold">
+                    Tidak Aktif
+                </span>
+            {% endif %}
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Peminjaman</p>
+            <p class="text-lg font-bold text-slate-800">{{ total_peminjaman }}</p>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Peminjaman Aktif</p>
+        
+        {% if jumlah_buku_aktif > 0 %}
+            <div class="text-sm font-medium text-slate-600 space-y-2">
+                <p class="text-amber-600 font-semibold mb-2">⚠️ {{ jumlah_buku_aktif }} buku masih dipinjam:</p>
+                <ul class="list-disc list-inside bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
+                    {% for judul in buku_dipinjam %}
+                        <li class="text-slate-700 font-medium">{{ judul }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p class="text-sm font-medium text-slate-500">0 buku masih dipinjam.</p>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
